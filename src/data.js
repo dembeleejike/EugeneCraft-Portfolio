@@ -19,7 +19,7 @@ export const PROFILE = {
   github: "https://github.com/dembeleejike",
   linkedin: "https://linkedin.com/in/eugene-ejike-687b813a8/",
   resumeUrl: "", // link to your hosted CV — button hides until this is set
-  photoUrl: "public/profileImage.jpg", // link/path to your photo — placeholder frame shows until this is set
+  photoUrl: "/profileImage.jpg", // link/path to your photo — placeholder frame shows until this is set
   availableFor: ["Freelance projects", "Web application development", "Business website builds", "Internships & collaborations"],
 };
 
@@ -105,7 +105,7 @@ export const OTHER_PROJECTS = [
   { name: "Todo App", desc: "A task manager with create, complete and delete flows.", tags: ["JavaScript", "HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "" },
   { name: "Calculator", desc: "A functioning calculator UI with standard operations.", tags: ["JavaScript","HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "" },
   { name: "Music Playlist UI", desc: "A playlist interface exploring media-app layout and interaction.", tags: ["HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "" },
-  { name: "This Portfolio", desc: "The site you're looking at right now — built, versioned and maintained like a product.", tags: ["React", "Tailwind"], filter: "Frontend", liveUrl: "", repoUrl: "" },
+  { name: "This Portfolio", desc: "The site you're looking at right now — built, versioned and maintained like a product.", tags: ["React", "Tailwind"], filter: "Frontend", liveUrl: "https://eugene-craft-portfolio.vercel.app/", repoUrl: "https://github.com/dembeleejike/EugeneCraft-Portfolio.git" },
 ];
 
 export const JOURNEY = [
