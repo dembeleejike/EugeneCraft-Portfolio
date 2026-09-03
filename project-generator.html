@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>EugeneCrafts — Content Generator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+  :root {
+    --bg: #0B0D0F; --surface: #14171A; --surfaceHi: #1B1F23; --border: #262B2F;
+    --text: #E7E9EA; --muted: #8B9296; --faint: #5B6165; --amber: #F0B429; --green: #4ADE80;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 0 20px 80px; }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 22px; margin-top: 40px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 30px; line-height: 1.6; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .tab { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em;
+    padding: 10px 16px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; }
+  .tab.active { color: var(--amber); border-color: var(--amber); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--faint); margin: 18px 0 6px; }
+  input, textarea, select { width: 100%; padding: 10px 12px; background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--amber); }
+  textarea { resize: vertical; min-height: 70px; }
+  .hint { color: var(--faint); font-size: 12px; margin-top: 4px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  button.generate { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; font-size: 12px; letter-spacing: 0.04em;
+    background: var(--amber); color: var(--bg); border: none; padding: 14px 22px; margin-top: 28px; cursor: pointer; font-weight: 700; }
+  button.generate:hover { opacity: 0.88; }
+  .output-wrap { margin-top: 30px; display: none; }
+  .output-wrap.show { display: block; }
+  .output-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .output-label span:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; color: var(--green); }
+  .copy-btn { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; background: transparent;
+    border: 1px solid var(--border); color: var(--text); padding: 6px 12px; cursor: pointer; }
+  .copy-btn.copied { border-color: var(--green); color: var(--green); }
+  pre { background: var(--surfaceHi); border: 1px solid var(--border); padding: 16px; overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+  .instructions { background: var(--surface); border: 1px solid var(--border); padding: 16px; margin-top: 14px; font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .instructions b { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>&gt; content-generator</h1>
+  <p class="sub">Fill in the form, click Generate, paste the result into <b style="color:#E7E9EA">data.js</b> in the array named at the top of the output. No JS syntax to remember, nothing to break.</p>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="featured">Featured project</button>
+    <button class="tab" data-tab="other">Other project</button>
+    <button class="tab" data-tab="profile">Profile info</button>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="panel active" id="panel-featured">
+    <label>Project name</label>
+    <input id="f-name" placeholder="StoryXverse" />
+    <label>Tagline (one line)</label>
+    <input id="f-tagline" placeholder="Full-stack interactive storytelling platform" />
+    <div class="row">
+      <div><label>Status</label>
+        <select id="f-status"><option value="development">In development</option><option value="live">Live</option><option value="archived">Archived</option></select>
+      </div>
+      <div><label>Year</label><input id="f-date" placeholder="2026" /></div>
+    </div>
+    <label>Description (1–2 sentences)</label>
+    <textarea id="f-desc" placeholder="What the project does and who it's for."></textarea>
+    <label>Key features (comma separated)</label>
+    <input id="f-features" placeholder="Explore & Library, Leaderboard, Rewards system" />
+    <label>Tech stack tags (comma separated)</label>
+    <input id="f-tags" placeholder="React, Tailwind, Node.js, MongoDB" />
+    <div class="row">
+      <div><label>Live URL (leave blank if none yet)</label><input id="f-live" placeholder="https://..." /></div>
+      <div><label>GitHub URL (optional)</label><input id="f-repo" placeholder="https://github.com/..." /></div>
+    </div>
+    <label>Screenshot URL (optional — leave blank for placeholder)</label>
+    <input id="f-image" placeholder="https://..." />
+    <label>Add a case study? (optional — leave any field blank to skip)</label>
+    <label style="margin-top:14px">Problem it solves</label>
+    <textarea id="f-problem"></textarea>
+    <label>Your solution</label>
+    <textarea id="f-solution"></textarea>
+    <label>Biggest challenge</label>
+    <textarea id="f-challenges"></textarea>
+    <label>What you learned</label>
+    <textarea id="f-learned"></textarea>
+    <label>Result</label>
+    <textarea id="f-result"></textarea>
+    <button class="generate" onclick="generateFeatured()">Generate code</button>
+  </div>
+
+  <!-- OTHER -->
+  <div class="panel" id="panel-other">
+    <label>Project name</label>
+    <input id="o-name" placeholder="Quiz App" />
+    <label>Short description</label>
+    <textarea id="o-desc" placeholder="One or two sentences."></textarea>
+    <label>Tags (comma separated)</label>
+    <input id="o-tags" placeholder="React, JavaScript" />
+    <label>Category / filter label</label>
+    <input id="o-filter" placeholder="Frontend, Business, Full-Stack..." />
+    <div class="row">
+      <div><label>Live URL (optional)</label><input id="o-live" placeholder="https://..." /></div>
+      <div><label>GitHub URL (optional)</label><input id="o-repo" placeholder="https://github.com/..." /></div>
+    </div>
+    <button class="generate" onclick="generateOther()">Generate code</button>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="panel" id="panel-profile">
+    <p class="hint" style="margin-bottom:14px">Only the fields you fill in will appear in the output — leave the rest blank and skip them.</p>
+    <label>Email</label><input id="p-email" placeholder="you@example.com" />
+    <label>WhatsApp number (digits only, with country code)</label><input id="p-whatsapp" placeholder="2348000000000" />
+    <label>GitHub URL</label><input id="p-github" placeholder="https://github.com/yourusername" />
+    <label>LinkedIn URL</label><input id="p-linkedin" placeholder="https://linkedin.com/in/yourusername" />
+    <label>Resume/CV URL</label><input id="p-resume" placeholder="https://..." />
+    <label>Photo URL</label><input id="p-photo" placeholder="https://..." />
+    <label>Location</label><input id="p-location" placeholder="City, Nigeria" />
+    <button class="generate" onclick="generateProfile()">Generate code</button>
+  </div>
+
+  <div class="output-wrap" id="output-wrap">
+    <div class="output-label">
+      <span id="output-title">// paste into data.js</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyOutput()">Copy</button>
+    </div>
+    <pre id="output"></pre>
+    <div class="instructions" id="output-instructions"></div>
+  </div>
+</div>
+
+<script>
+function esc(s) { return (s || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"'); }
+function splitList(s) { return (s || "").split(",").map(x => x.trim()).filter(Boolean); }
+function show(title, code, instructions) {
+  document.getElementById("output-wrap").classList.add("show");
+  document.getElementById("output-title").textContent = title;
+  document.getElementById("output").textContent = code;
+  document.getElementById("output-instructions").innerHTML = instructions;
+  document.getElementById("output-wrap").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function generateFeatured() {
+  const name = document.getElementById("f-name").value;
+  const tagline = document.getElementById("f-tagline").value;
+  const status = document.getElementById("f-status").value;
+  const date = document.getElementById("f-date").value;
+  const desc = document.getElementById("f-desc").value;
+  const features = splitList(document.getElementById("f-features").value);
+  const tags = splitList(document.getElementById("f-tags").value);
+  const live = document.getElementById("f-live").value;
+  const repo = document.getElementById("f-repo").value;
+  const image = document.getElementById("f-image").value;
+  const problem = document.getElementById("f-problem").value;
+  const solution = document.getElementById("f-solution").value;
+  const challenges = document.getElementById("f-challenges").value;
+  const learned = document.getElementById("f-learned").value;
+  const result = document.getElementById("f-result").value;
+
+  let caseStudy = "";
+  if (problem || solution || challenges || learned || result) {
+    caseStudy = `,
+    caseStudy: {
+      problem: "${esc(problem)}",
+      solution: "${esc(solution)}",
+      challenges: "${esc(challenges)}",
+      learned: "${esc(learned)}",
+      result: "${esc(result)}",
+    }`;
+  }
+
+  const code = `  {
+    name: "${esc(name)}",
+    tagline: "${esc(tagline)}",
+    version: "v1.0.0",
+    status: "${status}",
+    date: "${esc(date)}",
+    desc: "${esc(desc)}",
+    features: [${features.map(f => `"${esc(f)}"`).join(", ")}],
+    tags: [${tags.map(t => `"${esc(t)}"`).join(", ")}],
+    liveUrl: "${esc(live)}",
+    repoUrl: "${esc(repo)}",
+    imageUrl: "${esc(image)}"${caseStudy}
+  },`;
+
+  show("// add this INSIDE the FEATURED_PROJECTS array in data.js",
+    code,
+    "Open <b>data.js</b> → find <b>FEATURED_PROJECTS</b> → paste this as a new item inside the square brackets (before the closing <b>];</b>).");
+}
+
+function generateOther() {
+  const name = document.getElementById("o-name").value;
+  const desc = document.getElementById("o-desc").value;
+  const tags = splitList(document.getElementById("o-tags").value);
+  const filter = document.getElementById("o-filter").value;
+  const live = document.getElementById("o-live").value;
+  const repo = document.getElementById("o-repo").value;
+
+  const code = `  { name: "${esc(name)}", desc: "${esc(desc)}", tags: [${tags.map(t => `"${esc(t)}"`).join(", ")}], filter: "${esc(filter)}", liveUrl: "${esc(live)}", repoUrl: "${esc(repo)}" },`;
+
+  show("// add this INSIDE the OTHER_PROJECTS array in data.js",
+    code,
+    "Open <b>data.js</b> → find <b>OTHER_PROJECTS</b> → paste this as a new item inside the square brackets (before the closing <b>];</b>).");
+}
+
+function generateProfile() {
+  const fields = {
+    email: document.getElementById("p-email").value,
+    whatsapp: document.getElementById("p-whatsapp").value,
+    github: document.getElementById("p-github").value,
+    linkedin: document.getElementById("p-linkedin").value,
+    resumeUrl: document.getElementById("p-resume").value,
+    photoUrl: document.getElementById("p-photo").value,
+    location: document.getElementById("p-location").value,
+  };
+  const lines = Object.entries(fields)
+    .filter(([, v]) => v && v.trim())
+    .map(([k, v]) => `  ${k}: "${esc(v)}",`);
+
+  if (lines.length === 0) {
+    show("// nothing to update", "// fill in at least one field above first.", "");
+    return;
+  }
+
+  show("// update these lines INSIDE the PROFILE object in data.js",
+    lines.join("\n"),
+    "Open <b>data.js</b> → find the <b>PROFILE</b> object → replace the matching lines with these.");
+}
+
+function copyOutput() {
+  const text = document.getElementById("output").textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("copy-btn");
+    btn.textContent = "Copied";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1500);
+  });
+}
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById("panel-" + tab.dataset.tab).classList.add("active");
+    document.getElementById("output-wrap").classList.remove("show");
+  });
+});
+</script>
+</body>
+</html>
