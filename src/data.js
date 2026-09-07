@@ -99,7 +99,7 @@ export const FEATURED_PROJECTS = [
 // Smaller / supporting work. filter can be any short category label you like.
 // >>> Use project-generator.html (Other tab) to add one of these <<<
 export const OTHER_PROJECTS = [
-  { name: "Manik Aluminum Company", desc: "A digital showroom and quote-request system for a local aluminium & building materials business.", tags: ["React", "Tailwind", "Node.js", "MongoDB"], filter: "Business", liveUrl: "", repoUrl: "" },
+  { name: "Manik Aluminum Company", desc: "A digital showroom and quote-request system for a local aluminium & building materials business.", tags: ["React", "Tailwind", "Node.js", "MongoDB"], filter: "Business", liveUrl: "https://manik-woad.vercel.app/", repoUrl: "https://github.com/dembeleejike/Manik-Aluminum/" },
   { name: "Sharifa's Clothing Website", desc: "A storefront-style website for a clothing business.", tags: ["HTML", "CSS"], filter: "Business", liveUrl: "", repoUrl: " https://dembeleejike.github.io/Sherifat-Collection-/ " },
   { name: "Quiz App", desc: "An interactive quiz application with scoring and question flow.", tags: ["JavaScript", "HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: " https://dembeleejike.github.io/Living-Storyverse-Quizz/ " },
   { name: "Todo App", desc: "A task manager with create, complete and delete flows.", tags: ["JavaScript", "HTML", "CSS"], filter: "Frontend", liveUrl: " ", repoUrl: " https://dembeleejike.github.io/My-Todo-App/ " },
