@@ -1,4 +1,4 @@
-alalaflLafhkalajlalar/* =================================================================
+/* =================================================================
    EDIT ME — this is the ONLY file you should need to touch when
    updating your portfolio: new projects, new links, new bio text.
    Never edit App.jsx just to update your content.
