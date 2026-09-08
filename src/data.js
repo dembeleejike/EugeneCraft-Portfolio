@@ -117,7 +117,7 @@ export const JOURNEY = [
 export const EDUCATION = {
   school: "Federal University of Technology Minna",
   program: "Computer Science",
-  status: "100 Level",
+  status: "200 Level",
 };
 
 export const LEARNING = [
