@@ -23,7 +23,7 @@ export const PROFILE = {
   availableFor: ["Freelance projects", "Web application development", "Business website builds", "Internships & collaborations"],
 };
 
-export const HIGHLIGHTS = Gn[
+export const HIGHLIGHTS = [
   // Only use numbers that are true when you publish. Edit freely.
   { n: "2+", l: "Full-stack platforms built" },
   { n: "8+", l: "Total projects shipped" },
@@ -100,11 +100,11 @@ export const FEATURED_PROJECTS = [
 // >>> Use project-generator.html (Other tab) to add one of these <<<
 export const OTHER_PROJECTS = [
   { name: "Manik Aluminum Company", desc: "A digital showroom and quote-request system for a local aluminium & building materials business.", tags: ["React", "Tailwind", "Node.js", "MongoDB"], filter: "Business", liveUrl: "https://manik-woad.vercel.app/", repoUrl: "https://github.com/dembeleejike/Manik-Aluminum/" },
-  { name: "Sharifa's Clothing Website", desc: "A storefront-style website for a clothing business.", tags: ["HTML", "CSS"], filter: "Business", liveUrl: "", repoUrl: " https://dembeleejike.github.io/Sherifat-Collection-/ " },
-  { name: "Quiz App", desc: "An interactive quiz application with scoring and question flow.", tags: ["JavaScript", "HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: " https://dembeleejike.github.io/Living-Storyverse-Quizz/ " },
-  { name: "Todo App", desc: "A task manager with create, complete and delete flows.", tags: ["JavaScript", "HTML", "CSS"], filter: "Frontend", liveUrl: " ", repoUrl: " https://dembeleejike.github.io/My-Todo-App/ " },
-  { name: "Calculator", desc: "A functioning calculator UI with standard operations.", tags: ["JavaScript","HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: " https://dembeleejike.github.io/Calculator/ " },
-  { name: "Music Playlist UI", desc: "A playlist interface exploring media-app layout and interaction.", tags: ["HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "https://dembeleejike.github.io/Playlist-UI/  " },
+  { name: "Sharifa's Clothing Website", desc: "A storefront-style website for a clothing business.", tags: ["HTML", "CSS"], filter: "Business", liveUrl: "", repoUrl: "https://dembeleejike.github.io/Sherifat-Collection-/" },
+  { name: "Quiz App", desc: "An interactive quiz application with scoring and question flow.", tags: ["JavaScript", "HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "https://dembeleejike.github.io/Living-Storyverse-Quizz/" },
+  { name: "Todo App", desc: "A task manager with create, complete and delete flows.", tags: ["JavaScript", "HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "https://dembeleejike.github.io/My-Todo-App/" },
+  { name: "Calculator", desc: "A functioning calculator UI with standard operations.", tags: ["JavaScript","HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "https://dembeleejike.github.io/Calculator/" },
+  { name: "Music Playlist UI", desc: "A playlist interface exploring media-app layout and interaction.", tags: ["HTML", "CSS"], filter: "Frontend", liveUrl: "", repoUrl: "https://dembeleejike.github.io/Playlist-UI/" },
   { name: "This Portfolio", desc: "The site you're looking at right now — built, versioned and maintained like a product.", tags: ["React", "Tailwind"], filter: "Frontend", liveUrl: "https://eugene-craft-portfolio.vercel.app/", repoUrl: "https://github.com/dembeleejike/EugeneCraft-Portfolio.git" },
 ];
 
