@@ -18,7 +18,7 @@ export const PROFILE = {
   whatsapp: "2348112153223",
   github: "https://github.com/dembeleejike",
   linkedin: "https://linkedin.com/in/eugene-ejike-687b813a8/",
-  resumeUrl: "", // link to your hosted CV — button hides until this is set
+  resumeUrl: "/Ejike_Eugene_Chibuike_Resume.pdf",
   photoUrl: "/profileImage.jpg", // link/path to your photo — placeholder frame shows until this is set
   availableFor: ["Freelance projects", "Web application development", "Business website builds", "Internships & collaborations"],
 };
